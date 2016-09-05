@@ -1,14 +1,22 @@
 ﻿namespace DataLayer
 {
-    using DataLayer.DatabaseHelper;
-    using DomainClasses;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
     using System.Data.SqlClient;
+    using DataLayer.DatabaseHelper;
+    using DomainClasses;
 
+    /// <summary>
+    /// Manages a user data access.
+    /// </summary>
     public class UserDAL : BaseDAL
     {
+        /// <summary>
+        /// Registers a user 
+        /// </summary>
+        /// <param name="user">A reference to <see cref="User"/>class. </param>
+        /// <returns>Affected rows.</returns>
         public int RegisterUser(User user)
         {
             int rc = 0;
@@ -25,6 +33,12 @@
             return rc;
         }
 
+        /// <summary>
+        /// Gets a user
+        /// </summary>
+        /// <param name="email">Email address of user</param>
+        /// <param name="password">Users Password </param>
+        /// <returns>A user.</returns>
         public DataSet GetUser(string email, string password)
         {
             DataSet ds = null;
@@ -38,6 +52,10 @@
             return ds;
         }
 
+        /// <summary>
+        /// Gets all users.
+        /// </summary>
+        /// <returns>A collection of users.</returns>
         public DataSet GetUsers()
         {
             DataSet ds = null;
@@ -49,6 +67,11 @@
             return ds;
         }
 
+        /// <summary>
+        /// Deletes a user
+        /// </summary>
+        /// <param name="id">User id.</param>
+        /// <returns>Affected rows.</returns>
         public int DeleteUser(int id)
         {
             int rc = 0;
@@ -62,6 +85,11 @@
             return rc;
         }
 
+        /// <summary>
+        /// Adds a address 
+        /// </summary>
+        /// <param name="address">A address reference</param>
+        /// <returns>Affected rows.</returns>
         public int AddAddress(Address address)
         {
             int rc = 0;
@@ -79,6 +107,11 @@
             return rc;
         }
 
+        /// <summary>
+        /// Gets a user address
+        /// </summary>
+        /// <param name="id">User id.</param>
+        /// <returns>A Address dataset.</returns>
         public DataSet GetAddress(int id)
         {
             DataSet ds = null;
