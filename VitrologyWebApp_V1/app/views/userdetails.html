@@ -1,0 +1,30 @@
+﻿<div class="container">
+    <div style="text-align:center">
+        <h4>{{info}}</h4>
+        
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <td>Street</td>
+            <td><input type="text" ng-model="address.street" /></td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td><input type="text" ng-model="address.state" /></td>
+        </tr>
+        <tr>
+            <td>PinCode</td>
+            <td><input type="text" ng-model="address.pincode" /></td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td><input type="text" ng-model="address.country" /></td>
+        </tr>
+        <tr>
+            <td>UserId</td>
+            <td><input type="text" ng-model="id" /></td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" ng-click="saveAddress(address)"> Save </button>
+    {{message}}
+</div>
