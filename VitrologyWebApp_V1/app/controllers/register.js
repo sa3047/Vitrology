@@ -20,9 +20,6 @@ angular.module('vitrologyApp')
                 Password: user.password
             };
 
-            //console.log(userData);
-            //UserService.register(userData).then(onUserRegister, onError);
-
             UserService.register(userData, function (response) {
                 //console.log('Registration done : ' + response);
                 var parseResponse = JSON.parse(response);
@@ -31,11 +28,19 @@ angular.module('vitrologyApp')
 
                 if (parseResponse.Success) {
                     console.log(parseResponse.Success);
-                    AuthenticationService.SetCredentials(userData.email, userData.password);
-                    // TODO : Hide menu
-                    $rootScope.hideMenus = true;
-                    // Go to main page
-                    $location.path('/');
+                    // After registration log in and fill global details for user
+                    AuthenticationService.Login(user.email, user.password, function (response) {
+                        var parseResponse = JSON.parse(response);
+                        console.log('Authenticate user after registration: ' + parseResponse);
+                        if (parseResponse) {
+                            console.log('user id: ' + parseResponse.Id);
+                            AuthenticationService.SetCredentials($scope.email, $scope.password, parseResponse.Id);
+                            // TODO : Hide menu
+                            $rootScope.hideMenus = true;
+                            // Go to main page
+                            $location.path('/');
+                        }
+                    });
                 }
 
             });
