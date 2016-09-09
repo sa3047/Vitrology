@@ -11,6 +11,8 @@
 angular.module('vitrologyApp')
     .controller('RegisterCtrl', function ($scope, $rootScope, $location, AuthenticationService, UserService) {
         $scope.info = 'Registration Info';
+        $scope.errorMessage = '';
+        $scope.error = false;
 
         $scope.registerUser = function (user) {
             var userData = {
@@ -28,6 +30,7 @@ angular.module('vitrologyApp')
 
                 if (parseResponse.Success) {
                     console.log(parseResponse.Success);
+                    $scope.error = false;
                     // After registration log in and fill global details for user
                     AuthenticationService.Login(user.email, user.password, function (response) {
                         var parseResponse = JSON.parse(response);
@@ -41,6 +44,11 @@ angular.module('vitrologyApp')
                             $location.path('/');
                         }
                     });
+                } else {
+                    console.log('Register error Message: ' + parseResponse.Message);
+                    $scope.error = true;
+                    $scope.errorMessage = parseResponse.Message;
+                    $rootScope.hideMenus = false;
                 }
 
             });
