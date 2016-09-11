@@ -1,0 +1,37 @@
+﻿Documentation for Application : 
+
+1) Clone the Repository :  git clone https://github.com/sa3047/Vitrology.git
+   (Assuming the installation of GIT on your local machine. If not please install.)
+   
+2) First Run the DB query on your database. (This will create VirologyDB along with Tables and store proc).
+
+3) Go into web.config file and change the connectionString for the application.
+	e.g. Changes need to be done in web.config file. I have enable trusted connection. (if you want you can use SQL authentication).
+	
+	THIS IS MY CONNECTION STRING
+    <add name="UserDBConnection" connectionString="Server=SWAPNIL\SQLEXPRESS;Database=VitrologyDb;Trusted_Connection=True;" providerName="System.Data.SqlClient" />
+	
+	YOUR CONNECTION STRING
+	<add name="UserDBConnection" connectionString="Server=YOUR_SERVERNAME;Database=VitrologyDb;Trusted_Connection=True;" providerName="System.Data.SqlClient" />
+	
+4) Build the solution.
+
+5) Please click on VitrologyWebApp_V1 project
+	a) Find the Index.html page at the root of the project.
+	b) Right click on Index.html page and then select "Set as a start page". Then the application.
+
+6) When you start the project you will see the Log in page 
+	Note :
+		a) Assuming you have run the sql query (step 2)for the application. 
+		b) If you try to login into app with email and password. 
+		   It will show you following error : User not Register Or Please enter correct login credentials.
+		c) As their is no user initially you have to register a user from registration page.
+
+7) Go to Registration page.
+	a) Enter the details. and if registration is succesful you will be directed to Dashboard page of Application.
+	b) If registration is not succesful you will have erro message.
+
+8) On navigation Menu you can select the UserDetails you will see address if there is already address present for the currently logged in user.
+   else you can enter the details and save the address.
+   
+

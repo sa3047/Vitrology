@@ -8,6 +8,7 @@
     using DataLayer;
     using DomainClasses;
     using VitrologyWebApp_V1.Helpers;
+    using System;
 
     /// <summary>
     /// Handles http requests for User
@@ -32,7 +33,15 @@
                 };
 
                 var result = userDAL.RegisterUser(user);
-                return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new ApiResult() { Success = true, Message = "User Registerd." });
+                if(result > 0)
+                {
+                    return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new ApiResult() { Success = true, Message = "User Registerd." });
+                }
+                else
+                {
+                    return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new ApiResult() { Success = true, Message = "User not Registerd." });
+                }
+                
             }
             catch (System.Exception ex)
             {
@@ -61,7 +70,9 @@
 
                 var result = userDAL.GetUser(user.Email, user.Password);
 
-                var userResponse = result.Tables[0].AsEnumerable().Select(r =>
+                if(result.Tables[0].Rows.Count > 0)
+                {
+                    var userResponse = result.Tables[0].AsEnumerable().Select(r =>
                                             new User()
                                             {
                                                 Id = r.Field<int>("Id"),
@@ -71,7 +82,13 @@
                                                 Password = r.Field<string>("LastName"),
                                             }).ToList().First();
 
-                return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(userResponse);
+                    return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(userResponse);
+                }
+                else
+                {
+                    throw new Exception("User not Register OR Please enter correct login credentials.");
+                }
+                
             }
             catch (System.Exception ex)
             {

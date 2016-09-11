@@ -36,10 +36,11 @@ angular.module('vitrologyApp')
                         var parseResponse = JSON.parse(response);
                         console.log('Authenticate user after registration: ' + parseResponse);
                         if (parseResponse) {
-                            console.log('user id: ' + parseResponse.Id);
-                            AuthenticationService.SetCredentials($scope.email, $scope.password, parseResponse.Id);
+                            
+                            AuthenticationService.SetCredentials($scope.email, $scope.password, parseResponse.Id, parseResponse.FirstName);
                             // TODO : Hide menu
                             $rootScope.hideMenus = true;
+                            console.log('User Name: ' + $rootScope.globals.currentUser.username);
                             // Go to main page
                             $location.path('/');
                         }

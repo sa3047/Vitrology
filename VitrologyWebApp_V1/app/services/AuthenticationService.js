@@ -18,13 +18,14 @@ app.factory('AuthenticationService',
             };
 
             // Create global variable 
-            service.SetCredentials = function (email, password,id) {
+            service.SetCredentials = function (email, password, id, username) {
 
                 $rootScope.globals = {
                     currentUser: {
-                        id:id,
+                        id: id,
                         email: email,
-                        password: password
+                        password: password,
+                        username: username
                     }
                 };
 

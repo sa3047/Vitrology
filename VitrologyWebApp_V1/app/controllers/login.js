@@ -19,13 +19,14 @@ angular.module('vitrologyApp')
             $scope.dataLoading = true;
             AuthenticationService.Login($scope.email, $scope.password, function (response) {
                 var parseResponse = JSON.parse(response);
-                console.log('Authenticated user ' + parseResponse.Success);
-                //console.log('Authenticated Message ' + parseResponse.Message);
-                if (parseResponse.Success) {
-                    console.log('user id: ' + parseResponse.Id);
-                    AuthenticationService.SetCredentials($scope.email, $scope.password, parseResponse.Id);
+                console.log('Authenticated user ' + parseResponse.Id);
+                if (parseResponse.Id) {
+                    
+                    AuthenticationService.SetCredentials($scope.email, $scope.password, parseResponse.Id, parseResponse.FirstName);
                     // TODO : Hide menu
                     $rootScope.hideMenus = true;
+                    // $rootScope.userName = parseResponse.FirstName;
+                    console.log('User Name: ' + $rootScope.globals.currentUser.username);
                     // Go to main page
                     $scope.error = false;
 
